@@ -1,9 +1,11 @@
+/* standard */
 * {
     font-family: Helvetica, Arial, "Lucida Grande", "sans-serif";
     font-size: 12px;
     line-height: 16px;
 }
 
+/* chacoal */
 .chacoal, .chacoal * {
     color: #fff;
 }

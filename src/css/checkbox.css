@@ -1,0 +1,40 @@
+/* standard */
+input[type=checkbox] {
+    display: none;
+}
+
+input[type=checkbox] + label {
+    cursor: pointer;
+}
+
+input[type=checkbox] + label:before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+    -webkit-border-radius: 3px;
+}
+
+input[type=checkbox]:checked + label:before {
+    content: "\2713";
+    text-align: center;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+/* chacoal */
+input[type=checkbox] + label:before {
+    background-color: #313131;
+    -webkit-box-shadow: 0 1px #474747, inset 0 1px 0 1px rgba(71, 71, 71, 0.2), inset 0 0 0 1px #000, inset 0 0 0 2px rgba(71, 71, 71, 0.5);
+}
+
+input[type=checkbox] + label:hover:before {
+    background-color: #36260c;
+}
+
+input[type=checkbox]:checked + label:before {
+    color: #FF9000;
+}
+
+/* pearl */
