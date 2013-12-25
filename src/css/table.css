@@ -1,0 +1,33 @@
+table.nova {
+    border: 1px solid #313131;
+    border-collapse: collapse;
+    /*border-spacing: 0;*/
+}
+
+table.nova tr {
+    height: 32px;
+}
+
+table.nova td {
+    border-top: 1px solid #313131;
+    padding: 5px;
+}
+
+/* chacoal */
+.chacoal table.nova {
+    background-color: #212121;
+}
+
+.chacoal table.nova tr:nth-child(even) {
+    background-color: #1c1c1c;
+}
+
+.chacoal table.nova tr.header {
+    background-color: #141414;
+}
+
+.chacoal table.nova tr.title {
+    font-weight: bold;
+}
+
+

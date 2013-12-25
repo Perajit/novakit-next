@@ -5,38 +5,113 @@
     <link rel="stylesheet" type="text/css" href="css/novakit.css">
 </head>
 <body class="chacoal">
-<div><input type="button" value="Button (input tag)"></div>
-<br>
-<div><button>Button (button tag)</button></div>
-<br>
-<div><input type="text" value="TextBox"></div>
-<br>
-TextLabel
-<br>
-<br>
-<input id="radio1" type="radio" name="radio" checked>
-<label for="radio1">Radio 1</label>
-<input id="radio2" type="radio" name="radio">
-<label for="radio2">Radio 2</label>
-<br>
-<input id="radio3" type="radio" name="radio">
-<label for="radio3">Radio 3</label>
-<br>
-<br>
-<input id="checkbox1" type="checkbox" checked>
-<label for="checkbox1">CheckBox 1</label>
-<input id="checkbox2" type="checkbox">
-<label for="checkbox2">CheckBox 2</label>
-<br>
-<input id="checkbox3" type="checkbox">
-<label for="checkbox3">CheckBox 3</label>
-<br>
-<br>
-<select>
-    <option>Option 1</option>
-    <option>Option 2</option>
-    <option>Option 3</option>
-</select>
+<style>
+    .demoTable
+    {
+        width: 100%;
+        border: 1px solid #666;
+        border-collapse: collapse;
+    }
 
+    .demoTable tr {
+        height: 32px;
+    }
+
+    .demoTable td {
+        border: 1px solid #333;
+        padding: 5px;
+    }
+
+</style>
+<table class="demoTable">
+    <tr>
+        <td style="width:200px">Button</td>
+        <td>
+            <input type="button" value="Button (input tag)">
+            <button>Button (button tag)</button>
+        </td>
+    </tr>
+    <tr>
+        <td>CheckkBox</td>
+        <td>
+            <input id="checkbox1" type="checkbox" checked>
+            <label for="checkbox1">CheckBox 1</label>
+            <input id="checkbox2" type="checkbox">
+            <label for="checkbox2">CheckBox 2</label>
+            <br>
+            <input id="checkbox3" type="checkbox">
+            <label for="checkbox3">CheckBox 3</label>
+        </td>
+    </tr>
+    <tr>
+        <td>Radio</td>
+        <td>
+            <input id="radio1" type="radio" name="radio1" checked>
+            <label for="radio1">Radio 1</label>
+            <input id="radio2" type="radio" name="radio1">
+            <label for="radio2">Radio 2</label>
+            <br>
+            <input id="radio3" type="radio" name="radio1">
+            <label for="radio3">Radio 3</label>
+        </td>
+    </tr>
+    <tr>
+        <td>TextLabel</td>
+        <td>TextLabel</td>
+    </tr>
+    <tr>
+        <td>TextBox</td>
+        <td><input type="text" value="TextBox"></td>
+    </tr>
+    <tr>
+        <td>DropDown</td>
+        <td>
+            <select>
+                <option>Option 1</option>
+                <option>Option 2</option>
+                <option>Option 3</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>ImageButton</td>
+        <td><button><img src="css/images/magnify.png"></button></td>
+    </tr>
+    <tr>
+        <td>Table</td>
+        <td>
+            <table class="nova">
+                <tr class="title">
+                    <td colspan="3">TABLE WITH NOVA STYLE</td>
+                </tr>
+                <tr class="header">
+                    <td style="width:120px;">Company</td>
+                    <td style="width:50px;text-align:center">Last</td>
+                    <td style="width:100px;text-align:center">% Change</td>
+                </tr>
+                <tr>
+                    <td>Google</td>
+                    <td style="text-align:center">300</td>
+                    <td style="text-align:center">2.84%</td>
+                </tr>
+                <tr>
+                    <td>Apple</td>
+                    <td style="text-align:center">594</td>
+                    <td style="text-align:center">3.21%</td>
+                </tr>
+                <tr>
+                    <td>Facebook</td>
+                    <td style="text-align:center">42</td>
+                    <td style="text-align:center">1.52%</td>
+                </tr>
+                <tr>
+                    <td>Microsoft</td>
+                    <td style="text-align:center">28</td>
+                    <td style="text-align:center">0.89%</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

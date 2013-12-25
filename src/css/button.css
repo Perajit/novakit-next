@@ -12,6 +12,10 @@ input[type=button], button {
     outline: 0;
 }
 
+button > img {
+    vertical-align: middle;
+}
+
 /* chacoal */
 .chacoal input[type=button], .chacoal button {
     border-color: #000;

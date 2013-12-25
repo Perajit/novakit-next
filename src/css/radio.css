@@ -1,8 +1,27 @@
 /* standard */
 input[type=radio] {
-    /*display: none;*/
+    -webkit-appearance: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 6px;
+    outline: 0;
+    margin-bottom: 1px;
 }
 
 /* chacoal */
+.chacoal input[type=radio] {
+    background: #313131;
+    box-shadow: inset 0 -1px 1px #474747, inset 0 1px 1px rgba(0, 0, 0, 0.75), inset 0 0 4px 1px rgba(0, 0, 0, 0.6);
+    border-color: #000;
+}
+
+.chacoal input[type=radio]:hover {
+    background: #36260c;
+}
+
+.chacoal input[type=radio]:checked {
+    background-color: #ff9a00;
+    -webkit-box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.5), 0 1px rgba(255, 255, 255, 0.1);
+}
 
 /* pearl */
