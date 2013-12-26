@@ -1,25 +1,26 @@
 /* standard */
 select {
+    /* Firefox - remove default arrow*/
+    text-indent: 0.01px;
+    text-overflow: '';
+    /* Firefox - remove default arrow*/
+
+    -webkit-appearance: none;
+    border: 1px solid;
     outline: 0;
     border-radius: 3px;
-    height: 24px;
-    -webkit-appearance: button;
-    padding-left: 3px;
-    padding-right: 15px;
-
+    padding: 2px 15px 2px 3px;
+    margin: 0;
 }
 
 /* chacoal */
 .chacoal select {
-    border-color: #000;
     /*background: url("images/arrow.png") no-repeat 94%, -webkit-linear-gradient(top, #313131 0, #212121 30%, #000 100%);*/
-    background: #212121 url("images/arrow.png") no-repeat 94%;
-    -webkit-box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), inset 0 0 2px 0 rgba(255, 255, 255, 0.2);
-}
 
-/*.chacoal select:active {*/
-    /*color: red;*/
-/*}*/
+    border-color: #000;
+    background: #212121 url("images/arrow.png") no-repeat 94%;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), inset 0 0 2px 0 rgba(255, 255, 255, 0.2);
+}
 
 .chacoal select:focus {
     color: #c0761b;
@@ -28,6 +29,5 @@ select {
 .chacoal option:checked {
     color: #c0761b;
 }
-
 
 /* pearl */

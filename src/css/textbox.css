@@ -4,19 +4,20 @@ input[type=text] {
     font-size: 12px;
     margin: 0;
     height: 24px;
-    border: 1px solid #212121;
-    border-bottom-color: #313131;
+    border: 1px solid;
     border-radius: 2px;
     outline: 0;
     box-sizing: border-box;
+    -moz-box-sizing: border-box;
 }
 
 /* chacoal */
 .chacoal input[type=text] {
+    border-color: #212121;
+    border-bottom-color: #313131;
     color: #adadad;
     background: #212121;
-    -webkit-box-shadow: inset 0 0 4px 1px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(0, 0, 0, 0.6);
-
+    box-shadow: inset 0 0 4px 1px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(0, 0, 0, 0.6);
 }
 
 .chacoal input[type=text]:hover {
@@ -27,7 +28,7 @@ input[type=text] {
 .chacoal input[type=text]:focus {
     color: #fff;
     background: #36260c;
-    -webkit-box-shadow: 0 0 0 1px #c0761b
+    box-shadow: 0 0 0 1px #c0761b
 }
 
 /* pearl */

@@ -1,31 +1,31 @@
 /* standard */
 input[type=checkbox] {
-    display: none;
-}
-
-input[type=checkbox] + label:before {
+    -webkit-appearance: none;
     width: 14px;
     height: 14px;
-    display: inline-block;
+    margin-bottom: 0;
+    outline: 0;
     border-radius: 3px;
-    margin: 0 5px 0 4px;
+}
 
+input[type=checkbox]:checked:after {
     content: "\2713";
-    text-align: center;
+    line-height: 19px;
+    margin-left: 2px;
+    font-size: 14px;
 }
 
 /* chacoal */
-.chacoal input[type=checkbox] + label:before {
-    color: transparent;
+.chacoal input[type=checkbox] {
     background: #313131;
     box-shadow: 0 1px #474747, inset 0 1px 0 1px rgba(71, 71, 71, 0.2), inset 0 0 0 1px #000, inset 0 0 0 2px rgba(71, 71, 71, 0.5);
 }
 
-.chacoal input[type=checkbox] + label:hover:before {
+.chacoal input[type=checkbox]:hover {
     background: #36260c;
 }
 
-.chacoal input[type=checkbox]:checked + label:before {
+.chacoal input[type=checkbox]:checked:after {
     color: #FF9000;
 }
 
