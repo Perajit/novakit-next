@@ -8,8 +8,12 @@ table.nova tr {
     height: 32px;
 }
 
+table.nova tr.title {
+    font-weight: bold;
+}
+
 table.nova td {
-    border-top: 1px solid #313131;
+    border-top: 1px solid;
     padding: 5px;
 }
 
@@ -22,12 +26,19 @@ table.nova td {
     background-color: #1c1c1c;
 }
 
+.chacoal table.nova tr:hover {
+    background-color: #36260C;
+}
+
 .chacoal table.nova tr.header {
     background-color: #141414;
 }
 
 .chacoal table.nova tr.title {
-    font-weight: bold;
+    background-color: #212121;
 }
 
+.chacoal table.nova td {
+    border-color: #313131;
+}
 

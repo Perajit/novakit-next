@@ -1,0 +1,46 @@
+.nova-collapsible {
+    border: 1px solid;
+}
+
+.nova-collapsible .header {
+    height: 32px;
+    padding: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nova-collapsible .header:before {
+    content: "\25bc";
+    line-height: 22px;
+    margin-right: 5px;
+    float: left;
+}
+
+.nova-collapsible[collapsed=true] .header:before {
+    content: "\25ba";
+}
+
+.nova-collapsible .header .header-text {
+    line-height: 22px;
+    float: left;
+    margin-right: 5px;
+}
+
+.nova-collapsible .content {
+    padding: 5px;
+}
+
+.nova-collapsible[collapsed=true] .content {
+    display: none;
+}
+
+/* chacoal */
+.chacoal .nova-collapsible {
+    border-color: #000;
+}
+
+.chacoal .nova-collapsible .header {
+    background: #000 linear-gradient(rgba(49, 49, 49, 0.7) 0, rgba(75, 75, 75, 0.7) 5%, rgba(49, 49, 49, 0.7) 11%, rgba(33, 33, 33, 0.7) 91%, rgba(20, 20, 20, 0.7) 100%);
+}
