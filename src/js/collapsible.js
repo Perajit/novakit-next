@@ -5,7 +5,7 @@ window.addEventListener("load", function() {
         var currentElement = elements.item(i);
         var headerElements = currentElement.getElementsByClassName("header");
 
-        if (headerElements && headerElements.length > 0) {
+        if (headerElements.length > 0) {
             headerElements.item(0).onclick = function(element){
                 return function() {
                     var oldValue = element.getAttribute("collapsed");
