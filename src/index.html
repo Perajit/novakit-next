@@ -4,6 +4,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/novakit.css">
     <script type="text/javascript" src="js/collapsible.js"></script>
+    <script type="text/javascript" src="js/dropdown.js"></script>
 </head>
 <body class="chacoal">
 <style>
@@ -67,9 +68,9 @@
     <tr>
         <td>DropDown</td>
         <td>
-            <select>
+            <select id="select1">
                 <option>Option 1</option>
-                <option>Option 2</option>
+                <option selected>Option 2</option>
                 <option>Option 3</option>
             </select>
         </td>
@@ -151,6 +152,39 @@
             </div>
         </td>
     </tr>
+    <tr>
+        <td>DropDownMenu</td>
+        <td>
+            <div class="nova-dropdown" id="dd1">
+                <div class="list">
+                    <div>Item1</div>
+                    <div selected>Item22</div>
+                    <div>Item333</div>
+                </div>
+            </div>
+            <br>
+            <br>
+
+            <div class="nova-dropdown" id="dd2">
+                <div class="list">
+                    <div>a</div>
+                    <div>b</div>
+                    <div selected>c</div>
+                </div>
+            </div>
+        </td>
+    </tr>
 </table>
+<script>
+    var dd1 = document.getElementById("dd1");
+    dd1.addEventListener("selectedItemChanged", function(e) {
+        alert("selectedItemChanged event - " + e.detail.selectedItem.innerHTML);
+    });
+
+    var dd2 = document.getElementById("dd2");
+    dd2.addEventListener("selectedItemChanged", function (e) {
+        alert("selectedItemChanged event - " + e.detail.selectedItem.innerHTML);
+    });
+</script>
 </body>
 </html>
