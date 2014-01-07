@@ -40,7 +40,7 @@ DropDown.prototype.init = function() {
 DropDown.prototype.createDisplayedElement = function () {
     this.displayedElement = document.createElement("div");
     this.displayedElement.className = "displayedItem";
-    this.displayedElement.appendChild(document.createTextNode(this.selectedItemElement.innerHTML));
+    this.displayedElement.innerHTML = this.selectedItemElement.innerHTML;
     this.element.insertBefore(this.displayedElement, this.element.firstChild);
 
     this.displayedElement.addEventListener("click", this.onClicked.bind(this));
@@ -67,22 +67,27 @@ DropDown.prototype.onClicked = function (e) {
 };
 
 DropDown.prototype.onItemClicked = function (e) {
-    this.selectedItemElement.removeAttribute("selected");
-
-    this.selectedItemElement = e.target;
-    this.selectedItemElement.setAttribute("selected", "");
-    this.displayedElement.innerHTML = this.selectedItemElement.innerHTML;
-    this.setMenuEnable(false);
-
+    this.changeSelectedItem(e.currentTarget);
     e.stopPropagation();
+};
 
-    // Fire event
-    var event = new CustomEvent("selectedItemChanged", {
-        "detail": {
-            "selectedItem": this.selectedItemElement
-        }
-    });
-    this.element.dispatchEvent(event);
+DropDown.prototype.changeSelectedItem = function (element) {
+    if (this.selectedItemElement !== element) {
+        this.selectedItemElement.removeAttribute("selected");
+
+        this.selectedItemElement = element;
+        this.selectedItemElement.setAttribute("selected", "");
+        this.displayedElement.innerHTML = this.selectedItemElement.innerHTML;
+        this.setMenuEnable(false);
+
+        // Fire event
+        var event = new CustomEvent("selectedItemChanged", {
+            "detail": {
+                "selectedItem": this.selectedItemElement
+            }
+        });
+        this.element.dispatchEvent(event);
+    }
 };
 
 DropDown.prototype.onDocumentClicked = function() {
