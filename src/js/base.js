@@ -26,23 +26,3 @@ Base.handleFocusOut = function() {
 };
 
 Base.handleFocusOut();
-
-/*Base.autoFocusState = function(selector) {
-	var focusout = function() {
-		$(".etk-focused").removeClass("etk-focused");
-	};
-	
-	$(document)
-		.on("click.focusout", function(event) {
-			focusout();
-		})
-		.delegate(selector, "click.focus", function(event) {
-			if (this.tagName.toLowerCase() !== "label") {
-				focusout();
-				$(this).addClass("etk-focused");
-			}
-			event.stopPropagation();
-		});
-};
-
-Base.autoFocusState(".etk-checkbox, .etk-checkbox + label");*/
