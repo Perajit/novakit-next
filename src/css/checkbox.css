@@ -1,32 +1,121 @@
-/* standard */
-input[type=checkbox] {
-    display: none;
+input[type=checkbox]:not([disabled]),
+input[type=checkbox]:not([disabled]) + label {
+	cursor: pointer;
 }
 
-input[type=checkbox] + label:before {
-    width: 14px;
-    height: 14px;
-    display: inline-block;
-    border-radius: 3px;
-    margin: 0 5px 0 4px;
-
-    content: "\2713";
-    text-align: center;
+/**
+ * Saf3+, Chrome1+
+ */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+	input[type=checkbox].etk-checkbox {
+		visibility: hidden;
+	}
+	input[type=checkbox].etk-checkbox:not(.invisible):after {
+		visibility: visible;
+		box-sizing: border-box;
+		width: 14px;
+		height: 14px;
+		display: inline-block;
+		border-radius: 3px;
+		color: transparent;
+		content: "";
+	}
+	input[type=checkbox].etk-checkbox:checked:after {
+		text-align: center;
+		content: "\2713";
+	}
+	input[type=checkbox].etk-checkbox.partial-checked:not(:checked):after {
+		line-height: 14px;
+		text-indent: 3px;
+		content: "\25A0";
+	}
+	input[type=checkbox].etk-checkbox + * {
+		margin-left: 5px;
+	}
+	input[type=checkbox].etk-checkbox:checked:after,
+	input[type=checkbox].etk-checkbox.partial-checked:not(:checked):after {
+		color: #FF9000;
+	}
+	input[type=checkbox].etk-checkbox:disabled:after {
+		opacity: .5;
+	}
+	
+	/* Chacoal Theme */
+	.chacoal input[type=checkbox].etk-checkbox:after {
+		background: #313131;
+		box-shadow: 0 1px #474747, inset 0 1px 0 1px rgba(71, 71, 71, 0.2), inset 0 0 0 1px #000, inset 0 0 0 2px rgba(71, 71, 71, 0.5);
+	}
+	.chacoal input[type=checkbox].etk-checkbox:focus:after,
+	.chacoal input[type=checkbox].etk-checkbox.focused:after {
+		background: red;
+		box-shadow: 0 0 1px 0 #5b4a38, 0 1px #474747, inset 0 1px 0 1px rgba(71,71,71,0.4), inset 0 0 0 1px #000, inset 0 0 0 2px #36260c;
+	}
+	.chacoal input[type=checkbox].etk-checkbox:not([disabled]):hover:after {
+		background: #36260c;
+	}
 }
 
-/* chacoal */
-.chacoal input[type=checkbox] + label:before {
-    color: transparent;
-    background: #313131;
-    box-shadow: 0 1px #474747, inset 0 1px 0 1px rgba(71, 71, 71, 0.2), inset 0 0 0 1px #000, inset 0 0 0 2px rgba(71, 71, 71, 0.5);
-}
+/**
+ *Firefox only. 1+, IE7
+ */
+	input[type=checkbox].etk-checkbox,
+	x:-moz-any-link {
+		display: none;
+	}
+	input[type=checkbox].etk-checkbox + label:before,
+	x:-moz-any-link {
+		box-sizing: border-box;
+		width: 14px;
+		height: 14px;
+		display: inline-block;
+		margin-right: 5px;
+		vertical-align: bottom;
+		border-radius: 3px;
+		text-align: center;
+		color: transparent;
+		content: "\2713";
+	}
+	input[type=checkbox].etk-checkbox.partial-checked:not(:checked) + label:before,
+	x:-moz-any-link {
+		content: "2";
+	}
+	input[type=checkbox].etk-checkbox + *,
+	x:-moz-any-link {
+		margin-left: 0;
+	}
+	input[type=checkbox].etk-checkbox:checked + label:before,
+	input[type=checkbox].etk-checkbox.partial-checked:not(:checked) + label:before,
+	x:-moz-any-link {
+		color: #FF9000;
+	}
+	input[type=checkbox].etk-checkbox:disabled + label:before,
+	x:-moz-any-link {
+		opacity: .5;
+	}
 
-.chacoal input[type=checkbox] + label:hover:before {
-    background: #36260c;
-}
+	/* Chacoal Theme */
+	input[type=checkbox].etk-checkbox + label:before,
+	x:-moz-any-link {
+		background: #313131;
+		box-shadow: 0 1px #474747, inset 0 1px 0 1px rgba(71, 71, 71, 0.2), inset 0 0 0 1px #000, inset 0 0 0 2px rgba(71, 71, 71, 0.5);
+	}
+	.chacoal input[type=checkbox].etk-checkbox:focus + label:before,
+	.chacoal input[type=checkbox].etk-checkbox,focus + label:before {
+		box-shadow: 0 0 1px 0 #5b4a38, 0 1px #474747, inset 0 1px 0 1px rgba(71,71,71,0.4), inset 0 0 0 1px #000, inset 0 0 0 2px #36260c;
+	}
+	input[type=checkbox].etk-checkbox:not([disabled]):hover + label:before,
+	x:-moz-any-link {
+		background: #36260c;
+	}
 
-.chacoal input[type=checkbox]:checked + label:before {
-    color: #FF9000;
+/**
+ *IE6, IE7, IE8
+ */
+@media \0screen\,screen\9 {
+	input[type=checkbox].etk-checkbox {
+		display: inline-block;
+	}
+	input[type=checkbox].etk-checkbox + * {
+		margin-left: 5px;
+	}
 }
-
-/* pearl */

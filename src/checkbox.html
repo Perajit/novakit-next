@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<link rel="stylesheet" type="text/css" href="css/novakit.css" />
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/checkbox.js"></script>
+	<script>
+		$(document).ready(function() {
+			var master = new CheckBox($("#check0")[0]);
+			master.setSlaves("input[type=checkbox].etk-checkbox");
+			
+			$("#toggleEnabled").on("click", function() {
+				master.setEnabled(!master.isEnabled());
+			});
+			$("#toggleVisible").on("click", function() {
+				master.setVisible(!master.isVisible());
+			});
+			$("#setHasFocus").on("click", function() {
+				master.setFocus(true);
+			});
+			
+			var rcheck1 = new CheckBox({ text: "render1" });
+			rcheck1.render($("#container1")[0]);
+			
+			var rcheck2 = new CheckBox({ text: "render2" });
+			rcheck2.render($("#container2")[0], true);
+		});
+	</script>
+	<style>
+		.align-right {
+			width: 200px;
+			text-align: right;
+		}
+	</style>
+</head>
+<body class="chacoal">
+<form>
+	<input type="checkbox" id="check0" class="etk-checkbox" /><br />
+	<input type="checkbox" id="check1" class="etk-checkbox" /><label for="check1" class="align-right">check 1</label><br />
+	<input type="checkbox" id="check2" class="etk-checkbox" disabled="true" /><label for="check2">check 2</label><br />
+	<input type="checkbox" id="check3" class="etk-checkbox" /><label for="check3">check 3</label><br />
+	<input type="checkbox" id="check4" class="etk-checkbox" /><label for="check4">check 4</label><br />
+	<input type="checkbox" id="check5" class="etk-checkbox" /><label for="check5">check 5</label><br />
+	<input type="checkbox" id="check6" class="etk-checkbox" /><label for="check6">check 6</label><br />
+	<input type="checkbox" id="check7" class="etk-checkbox" /><label for="check7">check 7</label><br />
+	<input type="checkbox" id="check8" class="etk-checkbox" disabled /><label for="check8">check 8</label><br />
+	<input type="checkbox" id="check9" class="etk-checkbox" /><label for="check9">check 9</label><br />
+	<input type="checkbox" id="check10" class="etk-checkbox" /><label for="check10">check 10</label><br />
+	<br />
+	<input type="checkbox" id="check11" /><label for="check11" class="align-right">check 11</label><br />
+	<input type="checkbox" id="check12" disabled="true" /><label for="check12">check 12</label><br />
+	<input type="checkbox" id="check13" /><label for="check13">check 13</label><br />
+	<input type="checkbox" id="check14" /><label for="check14">check 14</label><br />
+	<input type="checkbox" id="check15" /><label for="check15">check 15</label><br />
+	<input type="checkbox" id="check16" /><label for="check16">check 16</label><br />
+	<input type="checkbox" id="check17" /><label for="check17">check 17</label><br />
+	<input type="checkbox" id="check18" disabled /><label for="check18">check 18</label><br />
+	<input type="checkbox" id="check19" /><label for="check19">check 19</label><br />
+	<input type="checkbox" id="check20" /><label for="check20">check 20</label><br />
+	<br />
+	<div id="container1"></div>
+	<div id="container2"></div>
+	<br />
+	<button id="toggleEnabled">toggleEnabled</button><br />
+	<button id="toggleVisible">toggleVisible</button><br />
+	<button id="setHasFocus">setHasFocus</button><br />
+</form>
+</body>
+</html>
