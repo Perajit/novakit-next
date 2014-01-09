@@ -86,15 +86,15 @@ CheckBox.prototype.setCheckState = function (value) {
 ///////////////////////////////////////////////////////
 
 CheckBox.prototype.isVisible = function () {
-	return !$(this.element_).hasClass("invisible");
+	return !$(this.element_).hasClass("etk-invisible");
 };
 
 CheckBox.prototype.setVisible = function (value) {
 	if (value) {
-		$(this.element_).removeClass("invisible");
+		$(this.element_).removeClass("etk-invisible");
 	}
 	else {
-		$(this.element_).addClass("invisible");
+		$(this.element_).addClass("etk-invisible");
 	}
 };
 
@@ -177,8 +177,8 @@ CheckBox.prototype.setError = function (value) {
 ///////////////////////////////////////////////////////
 
 CheckBox.prototype.backwardConstructure_ = function (model) {
-	console.log("@backwardConstructure_");
-	console.log(model);
+	// console.log("@backwardConstructure_");
+	// console.log(model);
 	this.model_ = model;
 };
 
@@ -221,15 +221,15 @@ CheckBox.prototype.setAutoChecked_ = function(selector) { // new method
 };
 
 CheckBox.prototype.isPartialChecked_ = function() { // new method
-	return $(this.element_).hasClass("partial-checked");
+	return $(this.element_).hasClass("etk-checkbox-partial");
 };
 
 CheckBox.prototype.setPartialCheckedStyle_ = function(value) { // new method
 	if (value) {
-		$(this.element_).addClass("partial-checked");
+		$(this.element_).addClass("etk-checkbox-partial");
 	}
 	else {
-		$(this.element_).removeClass("partial-checked");
+		$(this.element_).removeClass("etk-checkbox-partial");
 	}
 };
 

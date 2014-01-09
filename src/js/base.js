@@ -10,12 +10,12 @@ Base.setFocusIn = function(element) {
 	$(element).addClass("etk-focused");
 };
 
-Base.setFocusInOut = function(element) {
+Base.setFocusOut = function(element) {
 	$(element).removeClass("etk-focused");
 };
 
 Base.resetFocus = function() {
-	Base.setFocusInOut(".etk-focused");
+	Base.setFocusOut(".etk-focused");
 };
 
 Base.handleFocusOut = function() {
