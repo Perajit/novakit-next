@@ -10,6 +10,7 @@ function CheckBox() {
 	// For backward compatibility, we'll set control's element when call render()
 	var arg = arguments[0];
 	if (arg.nodeType && arg.tagName.toLowerCase() === "input" && arg.getAttribute("type") && arg.getAttribute("type").toLowerCase() === "checkbox") { // Check if checkbox element
+		arg.className = "etk-checkbox"; // Add class
 		this.element_ = arg;
 		this.setAutoState_();
 		if (!$(arg).next("label")[0]) {
@@ -165,6 +166,7 @@ CheckBox.prototype.getBehaviors = function () { // for backward compatibility
 };
 
 CheckBox.prototype.getKeyEventTarget = function () {
+	return this.getElement(); //FIXME
 };
 
 CheckBox.prototype.setError = function (value) {
@@ -180,17 +182,17 @@ CheckBox.prototype.backwardConstructor_ = function (model) {
 
 ///////////////////////////////////////////////////////
 
-CheckBox.prototype.getElement = function () {
+CheckBox.prototype.getElement = function () { // new method
 	return this.element_;
 };
 
-CheckBox.prototype.setSlaves = function (selector) {
+CheckBox.prototype.setSlaves = function (selector) { // new method
 	this.setAutoChecked_(selector);
 };
 
 CheckBox.prototype.setAutoState_ = function() { // new method
 	var this_ = this;
-	$(this.element_).on("click.autoState", function(event) {
+	$(this.element_).on("click.etkCheckboxAutoState", function() {
 			if (!this.checked && this_.isPartialChecked_()) {
 				this_.setPartialCheckedStyle_(false);
 			}
@@ -242,21 +244,28 @@ CheckBox.prototype.renderLabel_ = function(value) { // new method
 	$(this.element_).after(label_);
 };
 
-CheckBox.setFocusIn = function(element) {
+CheckBox.setFocusIn = function(element) { // new method
 	Base.setFocusIn(element);
 };
 
-CheckBox.setFocusOut = function(element) {
+CheckBox.setFocusOut = function(element) { // new method
 	Base.setFocusOut(element);
 };
 
-CheckBox.handleFocus = function() {
+CheckBox.handleFocus = function() { // new method
 	$(document)
 		.delegate(".etk-checkbox, .etk-checkbox + label", "click.etkCheckboxFocus", function(event) {
 			if (this.tagName.toLowerCase() !== "label") {
 				CheckBox.setFocusIn(this);
 			}
 			event.stopPropagation();
+		})
+		.on("keypress.etkCheckboxFocus", function(event) {
+			var focusElement = Base.getFocusedElement();
+			if ($(focusElement).hasClass("etk-checkbox") && event.keyCode === 32) {
+				focusElement.checked = !focusElement.checked;
+				event.stopPropagation();
+			}
 		});
 };
 

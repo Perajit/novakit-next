@@ -1,6 +1,10 @@
 function Base() {
 };
 
+Base.getFocusedElement = function() {
+	return $(".etk-focused")[0];
+};
+
 Base.isFocus = function(element) {
 	return $(element).hasClass("etk-focused");
 };
