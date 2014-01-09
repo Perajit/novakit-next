@@ -12,6 +12,9 @@ function CheckBox() {
 	if (arg.nodeType && arg.tagName.toLowerCase() === "input" && arg.getAttribute("type") && arg.getAttribute("type").toLowerCase() === "checkbox") { // Check if checkbox element
 		this.element_ = arg;
 		this.setAutoState_();
+		if (!$(arg).next("label")[0]) {
+			this.renderLabel_();
+		}
 	}
 	else {
 		//FIXME
@@ -28,29 +31,22 @@ CheckBox.prototype.render = function(element, isReplace) { // for backward compa
 		}
 		
 		var element_ = $('<input type="checkbox" class="etk-checkbox" />');
-		var label_ = $('<label></label>');
-		
-		if (this.model_ && this.model_.text) {
-			label_.text(this.model_.text);
-		}
 		
 		if (isReplace) {
 			if (element.id) {
 				element_.attr("id", element.id);
-				label_.attr("for", element.id);
 			}
-			$(element).after(label_).replaceWith(element_);
+			$(element).replaceWith(element_);
 		}
 		else {
 			if (element.id) {
-				var id = "etk-checkbox_" + element.id;
-				element_.attr("id", id);
-				label_.attr("for", id);
+				element_.attr("id", "etk-checkbox_" + element.id);
 			}
-			$(element).append(element_).append(label_);
+			$(element).append(element_);
 		}
 		
 		this.element_ = element_;
+		this.renderLabel_();
 	}
 };
 
@@ -172,13 +168,13 @@ CheckBox.prototype.getKeyEventTarget = function () {
 };
 
 CheckBox.prototype.setError = function (value) {
+	var jelement = $(this.element_);
 };
 
 ///////////////////////////////////////////////////////
 
 CheckBox.prototype.backwardConstructure_ = function (model) {
-	// console.log("@backwardConstructure_");
-	// console.log(model);
+	//FIXME
 	this.model_ = model;
 };
 
@@ -231,6 +227,19 @@ CheckBox.prototype.setPartialCheckedStyle_ = function(value) { // new method
 	else {
 		$(this.element_).removeClass("etk-checkbox-partial");
 	}
+};
+
+CheckBox.prototype.renderLabel_ = function(value) { // new method
+	var label_ = $('<label></label>');
+	
+	if (this.element_.id) {
+		label_.attr("for", this.element_.id);
+	}
+	if (this.model_ && this.model_.text) {
+		label_.text(this.model_.text);
+	}
+	
+	$(this.element_).after(label_);
 };
 
 CheckBox.setFocusIn = function(element) {
