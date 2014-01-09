@@ -1,3 +1,6 @@
+CheckBox.prototype = new Base();
+CheckBox.prototype.constructor = CheckBox;
+
 function CheckBox() {
 	if (!arguments.length) {
 		return;
@@ -7,18 +10,14 @@ function CheckBox() {
 	// For backward compatibility, we'll set control's element when call render()
 	var arg = arguments[0];
 	if (arg.nodeType && arg.tagName.toLowerCase() === "input" && arg.getAttribute("type") && arg.getAttribute("type").toLowerCase() === "checkbox") { // Check if checkbox element
-		var this_ = this;
 		this.element_ = arg;
-		$(arg).on("click.autoState", function() {
-				if (!this.checked && this_.isPartialChecked_()) {
-					this_.setPartialCheckedStyle_(false);
-				}
-			});
+		this.setAutoState_();
 	}
 	else {
 		//FIXME
 		var model = arg;
 		this.backwardConstructure_(model);
+		Base.call(this);
 	}
 };
 
@@ -76,7 +75,7 @@ CheckBox.prototype.setText = function (value) {
 };
 
 CheckBox.prototype.getCheckState = function () {
-	return this.element_.checked ? 1 : this.isPartialChecked_();
+	return this.element_.checked ? 1 : ( this.isPartialChecked_() ? 2 : 0 );
 };
 
 CheckBox.prototype.setCheckState = function (value) {
@@ -87,15 +86,15 @@ CheckBox.prototype.setCheckState = function (value) {
 ///////////////////////////////////////////////////////
 
 CheckBox.prototype.isVisible = function () {
-	return $(this.element_).hasClass("invisible");
+	return !$(this.element_).hasClass("invisible");
 };
 
 CheckBox.prototype.setVisible = function (value) {
 	if (value) {
-		$(this.element_).addClass("invisible");
+		$(this.element_).removeClass("invisible");
 	}
 	else {
-		$(this.element_).removeClass("invisible");
+		$(this.element_).addClass("invisible");
 	}
 };
 
@@ -109,11 +108,15 @@ CheckBox.prototype.setEnabled = function (value) {
 
 CheckBox.prototype.setFocus = function (value) {
 	if (value) {
-		this.element_.focus();
+		CheckBox.setFocusIn(this.element_);
 	}
 	else {
-		this.element_.blur();
+		CheckBox.setFocusOut(this.element_);
 	}
+};
+
+CheckBox.prototype.isFocus = function (value) {
+	return Base.isFocus(this.element_);
 };
 
 ///////////////////////////////////////////////////////
@@ -186,15 +189,35 @@ CheckBox.prototype.getElement = function () {
 };
 
 CheckBox.prototype.setSlaves = function (selector) {
+	this.setAutoChecked_(selector);
+};
+
+CheckBox.prototype.setAutoState_ = function() { // new method
 	var this_ = this;
-	$(this.element_).on("click.autoCheck", function() {
-		$(selector).not("[disabled]").prop("checked", this.checked);
-	});
-	$(document).delegate(selector, "click.autoCheck", function() {
-		var slaves = $(selector);
-		var totalChecked = slaves.filter(":checked").length;
-		this_.setCheckState(totalChecked ? (totalChecked < slaves.not("[disabled]").length ? 2 : 1) : 0);
-	});
+	$(this.element_).on("click.autoState", function(event) {
+			if (!this.checked && this_.isPartialChecked_()) {
+				this_.setPartialCheckedStyle_(false);
+			}
+		});
+};
+
+CheckBox.prototype.setAutoChecked_ = function(selector) { // new method
+	var this_ = this;
+	$(this.element_)
+		.on("click.etkCheckboxAutoChecked", function() {
+			$(selector).not("[disabled]").prop("checked", this.checked);
+		});
+	$(document)
+		.delegate(selector, "click.etkCheckboxAutoChecked", function() {
+			var slaves = $(selector);
+			var totalChecked = slaves.filter(":checked").length;
+			if (!totalChecked) {
+				this_.setCheckState(0);
+			}
+			else if (totalChecked < slaves.not("[disabled]").length) {
+				this_.setCheckState(2);
+			}
+		});
 };
 
 CheckBox.prototype.isPartialChecked_ = function() { // new method
@@ -210,14 +233,27 @@ CheckBox.prototype.setPartialCheckedStyle_ = function(value) { // new method
 	}
 };
 
-CheckBox.prototype.setFocusStyle_ = function(value) { // new method
-	if (value) {
-		$(this.element_).addClass("focused");
-	}
-	else {
-		$(this.element_).removeClass("focused");
-	}
+CheckBox.setFocusIn = function(element) {
+	element.focus();
+	Base.setFocusIn(element);
 };
+
+CheckBox.setFocusOut = function(element) {
+	element.blur();
+	Base.setFocusOut(element);
+};
+
+CheckBox.handleFocus = function() {
+	$(document)
+		.delegate(".etk-checkbox, .etk-checkbox + label", "click.etkCheckboxFocus", function(event) {
+			if (this.tagName.toLowerCase() !== "label") {
+				CheckBox.setFocusIn(this);
+			}
+			event.stopPropagation();
+		});
+};
+
+CheckBox.handleFocus();
 
 ///////////////////////////////////////////////////////
 
