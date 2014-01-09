@@ -19,7 +19,7 @@ function CheckBox() {
 	else {
 		//FIXME
 		var model = arg;
-		this.backwardConstructure_(model);
+		this.backwardConstructor_(model);
 		Base.call(this);
 	}
 };
@@ -45,7 +45,7 @@ CheckBox.prototype.render = function(element, isReplace) { // for backward compa
 			$(element).append(element_);
 		}
 		
-		this.element_ = element_;
+		this.element_ = element_[0];
 		this.renderLabel_();
 	}
 };
@@ -173,7 +173,7 @@ CheckBox.prototype.setError = function (value) {
 
 ///////////////////////////////////////////////////////
 
-CheckBox.prototype.backwardConstructure_ = function (model) {
+CheckBox.prototype.backwardConstructor_ = function (model) {
 	//FIXME
 	this.model_ = model;
 };
@@ -243,12 +243,10 @@ CheckBox.prototype.renderLabel_ = function(value) { // new method
 };
 
 CheckBox.setFocusIn = function(element) {
-	element.focus();
 	Base.setFocusIn(element);
 };
 
 CheckBox.setFocusOut = function(element) {
-	element.blur();
 	Base.setFocusOut(element);
 };
 

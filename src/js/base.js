@@ -6,11 +6,23 @@ Base.isFocus = function(element) {
 };
 
 Base.setFocusIn = function(element) {
+	if (element.disabled || element.style.visibility === "hidden") {
+		return;
+	}
+	
+	if (element.focus) {
+		element.focus();
+	}
+	
 	Base.resetFocus();
 	$(element).addClass("etk-focused");
 };
 
 Base.setFocusOut = function(element) {
+	if (element.blur) {
+		element.blur();
+	}
+	
 	$(element).removeClass("etk-focused");
 };
 
