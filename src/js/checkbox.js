@@ -9,7 +9,8 @@ function CheckBox() {
 	// Threat as new API if the argument assigned is DOM element: set control's element
 	// For backward compatibility, we'll set control's element when call render()
 	var arg = arguments[0];
-	if (arg.nodeType && arg.tagName.toLowerCase() === "input" && arg.getAttribute("type") && arg.getAttribute("type").toLowerCase() === "checkbox") { // Check if checkbox element
+	// if (arg.nodeType && arg.tagName.toLowerCase() === "input" && arg.getAttribute("type") && arg.getAttribute("type").toLowerCase() === "checkbox") { // Check if checkbox element
+	if (CheckBox.isValidElement_(arg)) { // Check if checkbox element
 		arg.className = "etk-checkbox"; // Add class
 		this.element_ = arg;
 		this.setAutoState_();
@@ -192,7 +193,7 @@ CheckBox.prototype.setSlaves = function (selector) { // new method
 
 CheckBox.prototype.setAutoState_ = function() { // new method
 	var this_ = this;
-	$(this.element_).on("click.etkCheckboxAutoState", function() {
+	$(this.element_).on("change.etkCheckboxAutoState", function() {
 			if (!this.checked && this_.isPartialChecked_()) {
 				this_.setPartialCheckedStyle_(false);
 			}
@@ -202,19 +203,26 @@ CheckBox.prototype.setAutoState_ = function() { // new method
 CheckBox.prototype.setAutoChecked_ = function(selector) { // new method
 	var this_ = this;
 	$(this.element_)
-		.on("click.etkCheckboxAutoChecked", function() {
-			$(selector).not("[disabled]").prop("checked", this.checked);
+		.on("change.etkCheckboxAutoChecked", function() {
+			var slaves = $(selector).not(this_.element_);
+			slaves.not("[disabled]").prop("checked", this.checked);
 		});
 	$(document)
-		.delegate(selector, "click.etkCheckboxAutoChecked", function() {
-			var slaves = $(selector);
+		.delegate(selector, "change.etkCheckboxAutoChecked", function() {
+			if (this === this_.element_) {
+				return;
+			}
+			
+			var slaves = $(selector).not(this_.element_);
 			var totalChecked = slaves.filter(":checked").length;
-			if (!totalChecked) {
-				this_.setCheckState(0);
-			}
-			else if (totalChecked < slaves.not("[disabled]").length) {
-				this_.setCheckState(2);
-			}
+			
+			this_.setCheckState( totalChecked ? ( totalChecked < slaves.not("[disabled]").length ? 2 : 1 ) : 0 );
+			// if (!totalChecked) {
+				// this_.setCheckState(0);
+			// }
+			// else if (totalChecked < slaves.not("[disabled]").length) {
+				// this_.setCheckState(2);
+			// }
 		});
 };
 
@@ -244,6 +252,14 @@ CheckBox.prototype.renderLabel_ = function(value) { // new method
 	$(this.element_).after(label_);
 };
 
+CheckBox.isValidElement_ = function(element, isAccessible) { // new method
+	if (element.nodeType && element.tagName.toLowerCase() === "input" && element.getAttribute("type") && element.getAttribute("type").toLowerCase() === "checkbox") {
+		return !isAccessible || Base.isAccessible(element);
+	}
+	
+	return false;
+};
+
 CheckBox.setFocusIn = function(element) { // new method
 	Base.setFocusIn(element);
 };
@@ -266,7 +282,6 @@ CheckBox.handleFocus = function() { // new method
 		})
 		.delegate(".etk-checkbox", "change.etkCheckboxFocus", function(event) { // Prevent change when toggle checked state for real HTML checkbox
 			// If checkbox is focused, stop default change event so that the checked state that is already set from keyup event will not be changed back
-			// Prevent default event of change of checkbox
 			if (Base.isFocus(this)) {
 				if (event.preventDefault) event.preventDefault();
 				else event.returnValue = false;
@@ -274,11 +289,12 @@ CheckBox.handleFocus = function() { // new method
 		})
 		.delegate(".etk-checkbox, .etk-checkbox + label", "click.etkCheckboxFocus", function(event) { // Handel focus style for CSS UI
 			// Set focus to clicked element only if it's checkbox.
-			if (this.tagName.toLowerCase() !== "label") {
+			if (CheckBox.isValidElement_(this)) {
 				CheckBox.setFocusIn(this);
+				if (!Base.isAccessible(this)) {
+					event.stopPropagation();
+				}
 			}
-			// Prevent event propagation for browser that is support UI
-			event.stopPropagation();
 		});
 };
 

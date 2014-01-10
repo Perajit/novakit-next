@@ -1,6 +1,10 @@
 function Base() {
 };
 
+Base.isAccessible = function(element) {
+	return $(element).css("display") !== "none" && $(element).css("visibility") !== "hidden" && !$(element).prop("disabled");
+};
+
 Base.getFocusedElement = function() {
 	return $(".etk-focused")[0];
 };

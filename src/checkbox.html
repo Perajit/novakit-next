@@ -9,7 +9,8 @@
 	<script>
 		$(document).ready(function() {
 			var master0 = new CheckBox($("#master0")[0]);
-			master0.setSlaves("input[type=checkbox].etk-checkbox:not(#master1)");
+			//master0.setSlaves("input[type=checkbox].etk-checkbox:not(#master1)");
+			master0.setSlaves("input[type=checkbox].etk-checkbox");
 			
 			var master1 = new CheckBox($("#master1")[0]);
 			
@@ -67,13 +68,13 @@
 	</tr><tr>
 		<td>
 			<input type="checkbox" id="check1" class="etk-checkbox" /><label for="check1" class="align-right">check 1</label><br />
-			<input type="checkbox" id="check2" class="etk-checkbox" disabled="true" /><label for="check2">check 2</label><br />
+			<input type="checkbox" id="check2" class="etk-checkbox" /><label for="check2">check 2</label><br />
 			<input type="checkbox" id="check3" class="etk-checkbox" /><label for="check3">check 3</label><br />
 			<input type="checkbox" id="check4" class="etk-checkbox" /><label for="check4">check 4</label><br />
 			<input type="checkbox" id="check5" class="etk-checkbox" /><label for="check5">check 5</label><br />
 			<input type="checkbox" id="check6" class="etk-checkbox" /><label for="check6">check 6</label><br />
 			<input type="checkbox" id="check7" class="etk-checkbox" /><label for="check7">check 7</label><br />
-			<input type="checkbox" id="check8" class="etk-checkbox" disabled /><label for="check8">check 8</label><br />
+			<input type="checkbox" id="check8" class="etk-checkbox" /><label for="check8">check 8</label><br />
 			<input type="checkbox" id="check9" class="etk-checkbox" /><label for="check9">check 9</label><br />
 			<input type="checkbox" id="check10" class="etk-checkbox" /><label for="check10">check 10</label><br />
 		</td><td>
