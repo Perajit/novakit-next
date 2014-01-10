@@ -253,19 +253,32 @@ CheckBox.setFocusOut = function(element) { // new method
 };
 
 CheckBox.handleFocus = function() { // new method
+	// Note in some browsers, etk-checkbox is displayed as CSS UI (if support CSS), but in some browsers, it is displayed as real HTML control (at least IE8)
+	// We have to handle both cases
 	$(document)
-		.delegate(".etk-checkbox, .etk-checkbox + label", "click.etkCheckboxFocus", function(event) {
+		.on("keyup.etkCheckboxFocus", function(event) { // Toggle checked state when keyup on focused checkbox
+			// Find focused element and pressed key
+			var focusedElement = Base.getFocusedElement();
+			var keyCode = window.event ? window.event.keyCode : event.which;
+			if ($(focusedElement).hasClass("etk-checkbox") && keyCode === 32) {
+				focusedElement.checked = !focusedElement.checked;
+			}
+		})
+		.delegate(".etk-checkbox", "change.etkCheckboxFocus", function(event) { // Prevent change when toggle checked state for real HTML checkbox
+			// If checkbox is focused, stop default change event so that the checked state that is already set from keyup event will not be changed back
+			// Prevent default event of change of checkbox
+			if (Base.isFocus(this)) {
+				if (event.preventDefault) event.preventDefault();
+				else event.returnValue = false;
+			}
+		})
+		.delegate(".etk-checkbox, .etk-checkbox + label", "click.etkCheckboxFocus", function(event) { // Handel focus style for CSS UI
+			// Set focus to clicked element only if it's checkbox.
 			if (this.tagName.toLowerCase() !== "label") {
 				CheckBox.setFocusIn(this);
 			}
+			// Prevent event propagation for browser that is support UI
 			event.stopPropagation();
-		})
-		.on("keypress.etkCheckboxFocus", function(event) {
-			var focusElement = Base.getFocusedElement();
-			if ($(focusElement).hasClass("etk-checkbox") && event.keyCode === 32) {
-				focusElement.checked = !focusElement.checked;
-				event.stopPropagation();
-			}
 		});
 };
 
